@@ -3,6 +3,9 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 import time
+from pathlib import Path
+
+from config import DOWNLOADS_FOLDER
 
 class DownloadHandler(FileSystemEventHandler):      #inherits from FileSystemEventHandler class
 
@@ -11,16 +14,18 @@ class DownloadHandler(FileSystemEventHandler):      #inherits from FileSystemEve
         if event.dest_path.endswith(".crdownload"):
             return
 
-        print("Final file:", event.dest_path)
+        file_path = Path(event.dest_path)
+        self.process_download(file_path)
+
+    def process_download(self, file_path):
+        print(file_path.name)
 
 #blueprint for creating watchers
 observer=Observer()
 
 handler=DownloadHandler()
 
-path_to_watch = r"C:\Users\acer\Downloads"
-
-observer.schedule(handler,path_to_watch,recursive=False)
+observer.schedule(handler, DOWNLOADS_FOLDER, recursive=False)
 
 try:
     observer.start()

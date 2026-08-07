@@ -5,8 +5,13 @@ from watchdog.events import FileSystemEventHandler
 import time
 
 class DownloadHandler(FileSystemEventHandler):      #inherits from FileSystemEventHandler class
-    def on_created(self, event):
-        print(event)
+
+    def on_moved(self, event):
+
+        if event.dest_path.endswith(".crdownload"):
+            return
+
+        print("Final file:", event.dest_path)
 
 #blueprint for creating watchers
 observer=Observer()

@@ -18,6 +18,9 @@ class DownloadHandler(FileSystemEventHandler):      #inherits from FileSystemEve
         self.process_download(file_path)
 
     def process_download(self, file_path):
+        self.classify_file(file_path)
+
+    def classify_file(self, file_path):
         print(file_path.name)
 
 #blueprint for creating watchers
@@ -25,7 +28,9 @@ observer=Observer()
 
 handler=DownloadHandler()
 
-observer.schedule(handler, DOWNLOADS_FOLDER, recursive=False)
+path_to_watch = DOWNLOADS_FOLDER
+
+observer.schedule(handler, path_to_watch, recursive=False)
 
 try:
     observer.start()

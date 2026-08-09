@@ -1,36 +1,25 @@
-# 🎓 AI-Powered Downloads Organizer for University Materials
+### 🎓 AI-Powered Downloads Organizer for University Materials
 
-## Workflow Architecture
+#### Workflow
 
 ```text
-   ┌────────────────────┐
-   │ New completed file │
-   └─────────┬──────────┘
+    New completed file 
              │
              ▼
-   ┌────────────────────┐
-   │  Extract filename  │
-   └─────────┬──────────┘
+    Extract filename  
              │
              ▼
-   ┌───────────────────────────┐
-   │ Check local rules/mapping │
-   └─────────┬─────────────────┘
+    Check local rules/mapping
              │
              ▼
           /─────\
          / Match \
         <  found? >
-         \       /
           \─────/
-           /   \
      YES  /     \  NO
          ▼       ▼
-┌───────────────┐   ┌───────────┐
-│ Move directly │   │  Ask LLM  │
-└───────────────┘   └─────┬─────┘
-                          │
-                          ▼
-                    ┌───────────┐
-                    │Destination│
-                    └───────────┘
+       Move       Ask LLM 
+     directly        │
+                     ▼
+                Destination
+                 

@@ -22,13 +22,18 @@ class DownloadHandler(FileSystemEventHandler):      #inherits from FileSystemEve
 
     def classify_file(self, file_path):
         file_name=file_path.name
+        print("File Name:",file_name)
 
         for module_code, module_name in MODULE_MAPPING.items():
             if module_code in file_name:
                 print("Module:",module_name)
                 return module_name
 
-        print("No Module Found")
+        print("No Module Found-AI Assist needed")
+        return self.ai_classify(file_path)
+
+    def ai_classify(self, file_path):
+        print("Sending file to AI")
         return None
 
 #blueprint for creating watchers

@@ -5,7 +5,7 @@ from watchdog.events import FileSystemEventHandler
 import time
 from pathlib import Path
 
-from config import DOWNLOADS_FOLDER
+from config import DOWNLOADS_FOLDER, MODULE_MAPPING
 
 class DownloadHandler(FileSystemEventHandler):      #inherits from FileSystemEventHandler class
 
@@ -21,7 +21,15 @@ class DownloadHandler(FileSystemEventHandler):      #inherits from FileSystemEve
         self.classify_file(file_path)
 
     def classify_file(self, file_path):
-        print(file_path.name)
+        file_name=file_path.name
+
+        for module_code, module_name in MODULE_MAPPING.items():
+            if module_code in file_name:
+                print("Module",module_name)
+                return module_name
+
+        print("No Module Found")
+        return None
 
 #blueprint for creating watchers
 observer=Observer()

@@ -68,6 +68,10 @@ class DownloadHandler(FileSystemEventHandler):
             headers=headers,
             json=data
         )
+        result = response.json()
+        answer = result["choices"][0]["message"]["content"].strip()
+        print("AI classification:", answer)
+        return answer
 
         print(response.status_code)
         print(response.text)

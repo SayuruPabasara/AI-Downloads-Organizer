@@ -4,13 +4,16 @@ from watchdog.events import FileSystemEventHandler
 
 import time
 from pathlib import Path
+import os
+import requests
+
+api_key = os.getenv("OPENROUTER_API_KEY").strip()
 
 from config import DOWNLOADS_FOLDER, MODULE_MAPPING
 
-class DownloadHandler(FileSystemEventHandler):      #inherits from FileSystemEventHandler class
+class DownloadHandler(FileSystemEventHandler):
 
     def on_moved(self, event):
-
         if event.dest_path.endswith(".crdownload"):
             return
 
@@ -21,21 +24,33 @@ class DownloadHandler(FileSystemEventHandler):      #inherits from FileSystemEve
         self.classify_file(file_path)
 
     def classify_file(self, file_path):
-        file_name=file_path.name
-        print("File Name:",file_name)
+        filename = file_path.name
 
         for module_code, module_name in MODULE_MAPPING.items():
-            if module_code in file_name:
-                print("Module:",module_name)
+            if module_code in filename:
+                print("Module:", module_name)
                 return module_name
 
-        print("No Module Found-AI Assist needed")
+        print("No module identified - AI needed")
         return self.ai_classify(file_path)
 
     def ai_classify(self, file_path):
-        print("Sending file to AI")
-        return None
+        filename = file_path.name
 
+        prompt = f"""
+        Classify this downloaded university file into one of these modules:
+
+        {MODULE_MAPPING}
+
+        Filename: {filename}
+
+        Return ONLY the module code.
+        If none of the modules match, return UNKNOWN.
+        """
+
+        print(prompt)
+
+        
 #blueprint for creating watchers
 observer=Observer()
 

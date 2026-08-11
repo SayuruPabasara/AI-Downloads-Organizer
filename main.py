@@ -31,7 +31,7 @@ class DownloadHandler(FileSystemEventHandler):
                 print("Module:", module_name)
                 return module_name
 
-        print("No module identified - AI needed")
+        print("\nNo module identified - AI needed")
         return self.ai_classify(file_path)
 
     def ai_classify(self, file_path):
@@ -72,9 +72,6 @@ class DownloadHandler(FileSystemEventHandler):
         answer = result["choices"][0]["message"]["content"].strip()
         print("AI classification:", answer)
         return answer
-
-        print(response.status_code)
-        print(response.text)
 
 
 #blueprint for creating watchers

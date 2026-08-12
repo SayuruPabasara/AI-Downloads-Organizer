@@ -1,5 +1,4 @@
 ### 🎓 AI-Powered Downloads Organizer for University Materials
-*Status: Under Active Development*🧑‍💻
 
 #### Workflow
 

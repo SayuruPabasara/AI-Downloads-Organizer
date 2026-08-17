@@ -3,23 +3,28 @@
 #### Workflow
 
 ```text
-    New completed file 
-             │
-             ▼
-    Extract filename  
-             │
-             ▼
-    Check local rules/mapping
-             │
-             ▼
-          /─────\
-         / Match \
-        <  found? >
-          \─────/
-     YES  /     \  NO
-         ▼       ▼
-       Move       Ask LLM 
-     directly        │
-                     ▼
-                Destination
-                 
+             Courseweb page
+                   │
+                   │ content script
+                   ▼
+          ┌─────────────────┐
+          │ Page information│
+          │                 │
+          │ course ID       │
+          │ section/topic   │
+          │ link text       │
+          │ download URL    │
+          └────────┬────────┘
+                   │
+                   ▼
+             Background.js
+                   │
+             download event
+                   │
+                   ▼
+                Python
+                   │
+          ┌────────┴────────┐
+          ▼                 ▼
+    Local mapping       OpenRouter
+             

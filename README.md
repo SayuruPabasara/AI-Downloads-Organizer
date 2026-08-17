@@ -3,28 +3,27 @@
 #### Workflow
 
 ```text
-             Courseweb page
-                   │
-                   │ content script
-                   ▼
-          ┌─────────────────┐
-          │ Page information│
-          │                 │
-          │ course ID       │
-          │ section/topic   │
-          │ link text       │
-          │ download URL    │
-          └────────┬────────┘
-                   │
-                   ▼
-             Background.js
-                   │
-             download event
-                   │
-                   ▼
-                Python
-                   │
-          ┌────────┴────────┐
-          ▼                 ▼
-    Local mapping       OpenRouter
-             
+Moodle page
+     │
+     │ context
+     ↓
+background.js
+     │
+     │ + actual download
+     ↓
+{
+    filename:
+    downloadUrl:
+    course:
+    week:
+    resource:
+}
+     │
+     ↓
+Python
+     │
+     ↓
+local mapping
+     │
+     ↓
+OpenRouter only if necessary

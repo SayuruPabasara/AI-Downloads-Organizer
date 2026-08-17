@@ -3,23 +3,27 @@
 #### Workflow
 
 ```text
-    New completed file 
-             │
-             ▼
-    Extract filename  
-             │
-             ▼
-    Check local rules/mapping
-             │
-             ▼
-          /─────\
-         / Match \
-        <  found? >
-          \─────/
-     YES  /     \  NO
-         ▼       ▼
-       Move       Ask LLM 
-     directly        │
-                     ▼
-                Destination
-                 
+Moodle page
+     │
+     │ context
+     ↓
+background.js
+     │
+     │ + actual download
+     ↓
+{
+    filename:
+    downloadUrl:
+    course:
+    week:
+    resource:
+}
+     │
+     ↓
+Python
+     │
+     ↓
+local mapping
+     │
+     ↓
+OpenRouter only if necessary
